@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Stats Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Game Stats Dashboard</h1>
+
+        <div class="nav-bar">
+            <button class="nav-button active-nav" data-view="player" onclick="showView('player')">Player Summary</button>
+            <button class="nav-button" data-view="compare" onclick="showView('compare')">Compare Players</button>
+            <button class="nav-button" data-view="training" onclick="showView('training')">Training Planner</button>
+            <button class="nav-button" data-view="activity" onclick="showView('activity')">Recent Activity</button>
+            <button class="nav-button" data-view="rankings" onclick="showView('rankings')">Player Rankings</button>
+        </div>
+
+        <p>Search for a RuneScape player</p>
+
+        <div id="player-view" class="app-view">
+            <div class="search-bar">
+                <input
+                    type="search"
+                    id="username"
+                    name="rs3-player-search"
+                    placeholder="Enter Username"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                />
+                <button onclick="searchPlayer()">Search</button>
+            </div>
+
+            <div id="recent-searches-container"></div>
+            <div id="stats"></div>
+        </div>
+
+        <div id="compare-view" class="app-view" style="display: none;">
+            <div class="search-bar">
+                <input
+                    type="search"
+                    id="compare-username-1"
+                    name="rs3-compare-player-1"
+                    placeholder="First Username"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                />
+                <input
+                    type="search"
+                    id="compare-username-2"
+                    name="rs3-compare-player-2"
+                    placeholder="Second Username"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                />
+                <button onclick="searchComparePlayers()">Search</button>
+            </div>
+
+            <div id="compare-recents-container"></div>
+            <div id="compare-stats"></div>
+        </div>
+
+        <div id="training-view" class="app-view" style="display: none;">
+            <div class="search-bar">
+                <input
+                    type="search"
+                    id="training-username"
+                    name="rs3-training-player"
+                    placeholder="Enter Username"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                />
+                <button onclick="searchTrainingPlayer()">Search</button>
+            </div>
+
+            <div id="training-recents-container"></div>
+
+            <div class="training-filter-bar">
+                <span class="sort-label">Mode:</span>
+                <button onclick="setTrainingMode('f2p')" id="training-f2p-button" class="sort-button">F2P</button>
+                <button onclick="setTrainingMode('p2p')" id="training-p2p-button" class="sort-button">P2P</button>
+            </div>
+
+            <div id="training-stats"></div>
+        </div>
+
+        <div id="activity-view" class="app-view" style="display:none;">
+            <div class="search-bar">
+                <input
+                    type="search"
+                    id="activity-username"
+                    placeholder="Enter Username"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                />
+                <button onclick="searchPlayerActivity()">Search</button>
+            </div>
+
+            <div id="activity-recents-container"></div>
+            <div id="activity-results"></div>
+        </div>
+
+        <div id="rankings-view" class="app-view" style="display:none;">
+            <div class="search-bar">
+                <input id="rankings-player-search" type="search" placeholder="Enter Username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+                <button onclick="searchRankingsPlayer()">Search</button>
+            </div>
+
+            <div id="rankings-recents-container"></div>
+
+            <div class="sort-bar">
+                <div class="sort-group">
+                    <select id="rankings-category" class="sort-select">
+                        <option value="0">Overall</option>
+                        <option value="1">Attack</option>
+                        <option value="2">Defence</option>
+                        <option value="3">Strength</option>
+                        <option value="4">Constitution</option>
+                        <option value="5">Ranged</option>
+                        <option value="6">Prayer</option>
+                        <option value="7">Magic</option>
+                        <option value="8">Cooking</option>
+                        <option value="9">Woodcutting</option>
+                        <option value="10">Fletching</option>
+                        <option value="11">Fishing</option>
+                        <option value="12">Firemaking</option>
+                        <option value="13">Crafting</option>
+                        <option value="14">Smithing</option>
+                        <option value="15">Mining</option>
+                        <option value="16">Herblore</option>
+                        <option value="17">Agility</option>
+                        <option value="18">Thieving</option>
+                        <option value="19">Slayer</option>
+                        <option value="20">Farming</option>
+                        <option value="21">Runecrafting</option>
+                        <option value="22">Hunter</option>
+                        <option value="23">Construction</option>
+                        <option value="24">Summoning</option>
+                        <option value="25">Dungeoneering</option>
+                        <option value="26">Divination</option>
+                        <option value="27">Invention</option>
+                        <option value="28">Archaeology</option>
+                        <option value="29">Necromancy</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="rankings-results"></div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
