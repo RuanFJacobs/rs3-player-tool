@@ -16,7 +16,25 @@ No installation required.
 
 ---
 
+## Screenshots
+
+### Player Summary
+![Player Summary](screenshots/player-summary.png)
+
+### Compare Players
+![Compare Players](screenshots/compare-players.png)
+
+### Training Planner
+![Training Planner](screenshots/training-planner.png)
+
+### Recent Activity
+![Recent Activity](screenshots/activity.png)
+
+### Rankings
+![Rankings](screenshots/rankings.png)
+
 ## Features
+- Use these usernames for testing: Jellieman, Ekath, Zezima, Epicname
 
 ### Player Summary
 - Search for any RuneScape 3 player
