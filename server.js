@@ -1,12 +1,14 @@
 const express = require("express");
+const path = require("path");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html");
+    res.sendFile(path.join(__dirname, "public", "index.html"));
 });
-app.use(express.static(__dirname));
 
 app.get("/api/rs3", async (req, res) => {
     const username = req.query.player;
@@ -57,6 +59,7 @@ app.get("/api/activity", async (req, res) => {
     if (!username) {
         return res.status(400).send("Missing username");
     }
+
     try {
         const url = `https://secure.runescape.com/m=adventurers-log/activity?searchName=${encodeURIComponent(username)}`;
         const response = await fetch(url);
@@ -66,9 +69,7 @@ app.get("/api/activity", async (req, res) => {
         }
 
         const html = await response.text();
-
         res.send(html);
-
     } catch (error) {
         console.error("Activity fetch error:", error);
         res.status(500).send("Failed to fetch activity");
