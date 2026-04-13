@@ -2160,41 +2160,64 @@ async function searchPlayerActivity() {
 }
 
 async function loadRankings(page = 1) {
-    const categorySelect = document.getElementById("rankings-category");
     const resultsDiv = document.getElementById("rankings-results");
 
-    currentRankingsCategory = categorySelect?.value || "0";
-    currentRankingsPage = page;
-
-    localStorage.setItem("currentRankingsCategory", currentRankingsCategory);
-    localStorage.setItem("currentRankingsPage", page);
-
-    resultsDiv.innerHTML = `<p>Loading ${getRankingsCategoryName(currentRankingsCategory)} rankings.</p>`;
+    if (resultsDiv) {
+        resultsDiv.innerHTML = "<p>Loading rankings...</p>";
+    }
 
     try {
-        const response = await fetch(`/api/rankings?category=${encodeURIComponent(currentRankingsCategory)}&page=${page}`);
+        const response = await fetch(`/api/rankings?category=${encodeURIComponent(currentRankingsCategory)}&page=${encodeURIComponent(page)}`);
+        const htmlText = await response.text();
 
         if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
+            if (response.status === 403) {
+                if (resultsDiv) {
+                    resultsDiv.innerHTML = `
+                        <div class="rankings-unavailable-card">
+                            <h3>Rankings currently unavailable</h3>
+                            <p>The live deployed version cannot access the RuneScape rankings endpoint right now.</p>
+                            <p>All other features of the app still work normally.</p>
+                            <p>Rankings may still work when running the app locally.</p>
+                        </div>
+                    `;
+                }
+                return false;
+            }
+
+            throw new Error(`Rankings request failed with status ${response.status}`);
         }
 
-        const htmlText = await response.text();
         currentRankingsData = parseRankingsHTML(htmlText);
 
         if (!currentRankingsData.length) {
+            if (resultsDiv) {
+                resultsDiv.innerHTML = `
+                    <div class="rankings-unavailable-card">
+                        <h3>Rankings currently unavailable</h3>
+                        <p>The rankings page loaded, but the returned data could not be parsed.</p>
+                    </div>
+                `;
+            }
             return false;
         }
 
-        await loadPinnedRankingsPlayer();
+        currentRankingsPage = page;
+        localStorage.setItem("currentRankingsPage", String(page));
         renderRankings();
         return true;
-    } catch (error) {
-        console.error("Error loading rankings:", error);
 
-        resultsDiv.innerHTML = `
-            <p>Could not load rankings.</p>
-            <p>Please try again.</p>
-        `;
+    } catch (error) {
+        console.error("Rankings load error:", error);
+
+        if (resultsDiv) {
+            resultsDiv.innerHTML = `
+                <div class="rankings-unavailable-card">
+                    <h3>Rankings currently unavailable</h3>
+                    <p>This feature is temporarily unavailable in the deployed version.</p>
+                </div>
+            `;
+        }
 
         return false;
     }
