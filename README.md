@@ -186,7 +186,7 @@ Possible improvements:
 <img src="screenshots/player-summary.png" width="700">
 
 ### Compare Players
-<img src="screenshots/compare-players.png" width="700">s
+<img src="screenshots/compare-players.png" width="700">
 
 ### Training Planner
 <img src="screenshots/training-planner.png" width="700">
