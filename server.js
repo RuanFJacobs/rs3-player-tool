@@ -39,8 +39,11 @@ app.get("/api/rankings", async (req, res) => {
 
     try {
         const rankingsUrl = `https://secure.runescape.com/m=hiscore/ranking?category_type=0&table=${category}&page=${page}`;
-        const response = await fetch(rankingsUrl);
-
+        const response = await fetch(rankingsUrl, {
+            headers: {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
+            }
+        });
         if (!response.ok) {
             return res.status(response.status).send(`Rankings API returned ${response.status}`);
         }
