@@ -37,22 +37,39 @@ app.get("/api/rankings", async (req, res) => {
     const category = req.query.category || "0";
     const page = req.query.page || "1";
 
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+
     try {
         const rankingsUrl = `https://secure.runescape.com/m=hiscore/ranking?category_type=0&table=${category}&page=${page}`;
+
         const response = await fetch(rankingsUrl, {
+            signal: controller.signal,
             headers: {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Cache-Control": "no-cache",
+                "Pragma": "no-cache",
+                "Referer": "https://secure.runescape.com/",
+                "Upgrade-Insecure-Requests": "1"
             }
         });
+
+        const body = await response.text();
+
         if (!response.ok) {
+            console.error("Rankings upstream status:", response.status);
+            console.error("Rankings upstream body preview:", body.slice(0, 1000));
             return res.status(response.status).send(`Rankings API returned ${response.status}`);
         }
 
-        const dataText = await response.text();
-        res.send(dataText);
+        res.type("html").send(body);
     } catch (error) {
         console.error("Server rankings fetch error:", error);
         res.status(500).send("Failed to fetch rankings");
+    } finally {
+        clearTimeout(timeout);
     }
 });
 
