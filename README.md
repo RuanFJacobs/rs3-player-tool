@@ -183,19 +183,19 @@ Possible improvements:
 ## Screenshots
 
 ### Player Summary
-![Player Summary](screenshots/player-summary.png)
+<img src="screenshots/player-summary.png" width="700">
 
 ### Compare Players
-![Compare Players](screenshots/compare-players.png)
+<img src="screenshots/compare-players.png" width="700">s
 
 ### Training Planner
-![Training Planner](screenshots/training-planner.png)
+<img src="screenshots/training-planner.png" width="700">
 
 ### Recent Activity
-![Recent Activity](screenshots/activity.png)
+<img src="screenshots/activity.png" width="700">
 
 ### Rankings
-![Rankings](screenshots/rankings.png)
+<img src="screenshots/rankings.png" width="700">
 
 ---
 
