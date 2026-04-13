@@ -16,23 +16,6 @@ No installation required.
 
 ---
 
-## Screenshots
-
-### Player Summary
-![Player Summary](screenshots/player-summary.png)
-
-### Compare Players
-![Compare Players](screenshots/compare-players.png)
-
-### Training Planner
-![Training Planner](screenshots/training-planner.png)
-
-### Recent Activity
-![Recent Activity](screenshots/activity.png)
-
-### Rankings
-![Rankings](screenshots/rankings.png)
-
 ## Features
 - Use these usernames for testing: Jellieman, Ekath, Zezima, Epicname
 
@@ -96,7 +79,6 @@ Rankings may still work when running the app locally.
 │ ├── script.js
 │ ├── milestones.js
 │ └── icons/
-├── rs3-player-tool/
 ├── server.js
 ├── package.json
 ├── package-lock.json
@@ -195,6 +177,25 @@ Possible improvements:
 - add XP progression charts
 - add PvM progression tracking
 - improve UI polish
+
+---
+
+## Screenshots
+
+### Player Summary
+![Player Summary](screenshots/player-summary.png)
+
+### Compare Players
+![Compare Players](screenshots/compare-players.png)
+
+### Training Planner
+![Training Planner](screenshots/training-planner.png)
+
+### Recent Activity
+![Recent Activity](screenshots/activity.png)
+
+### Rankings
+![Rankings](screenshots/rankings.png)
 
 ---
 
