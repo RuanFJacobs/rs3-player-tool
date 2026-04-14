@@ -1189,3 +1189,24 @@ input[type="search"]::-webkit-search-cancel-button {
     background: #4a637e;
     border: 1px solid #5f7ea0;
 }
+
+.rankings-unavailable-card {
+    margin: 16px auto;
+    max-width: 520px;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+}
+
+.rankings-unavailable-card h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.rankings-unavailable-card p {
+    margin: 6px 0;
+    color: #d8d8d8;
+    font-size: 0.9rem;
+}
